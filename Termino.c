@@ -5,38 +5,45 @@
 #include <ctype.h>
 #include "Termino.h"
 
-void errorCerrar(){printf("\n Error al cerrar el archivo!...\n");}
-void errorAbrir(){printf("\n Error al abrir el archivo!...\n");}
-
+int dimensionArchivo (char archivoTexto[])
+{
+    FILE* arch = fopen(archivoTexto, "rb");
+    int tamanio = 0;
+    if (arch)
+    {
+        fseek(arch, 0, SEEK_END);
+        tamanio = (ftell(arch)/(sizeof(char)));
+        if(fclose(arch) != 0)
+            printf("\n Error al cerrar el archivo!...\n");
+    }
+    else
+        printf("\n Error al abrir el archivo!...\n");
+    return tamanio;
+}
 // Abre el archivo bin de texto por parametro y lo retorna formando un string del tamaño total del texto.
 
-char *generarStringTxt(char archivoTexto[]){
+char *generarStringTxt(char archivoTexto[], int tamanio){
     FILE *arch = fopen(archivoTexto, "rb");
     char *texto;
     if(arch){
-        fseek(arch, 0, SEEK_END);
-        int tamanio = (ftell(arch))/(sizeof(char));
-         printf("\n Tamanio %i\n", tamanio);
         texto = (char*)malloc(sizeof(char)*tamanio);
         fseek(arch, 0, SEEK_SET);
-
         fread(texto, tamanio*sizeof(char), 1, arch);
-
         if(fclose(arch) != 0)
-            errorCerrar();
+            printf("\n Error al cerrar el archivo!...\n");
     }
     else
-        errorAbrir();
+        printf("\n Error al abrir el archivo!...\n");
     return texto;
 }
+
 // Compara los caracteres devolviendo 1 si es una letra valida, o 0 si es un caracter especial, espacio, etc...
 // Solo valido para ASCII en codificacion ANSI
 
 int validaChar(char letra){
     int rta = 0;
 
-    if(
-       (letra>64 && letra<91) ||
+    /*if((letra>64 && letra<91) ||
        (letra>96 && letra<123) ||
        letra == -31 ||
        letra == -23 ||
@@ -47,9 +54,12 @@ int validaChar(char letra){
        letra == -56 ||
        letra == -52 ||
        letra == -46 ||
-       letra == -39
-    )
-        rta=1;//if (isalpha(letra))          -> Reemplaza lo anterior
+       letra == -39)
+        rta=1;*/
+    if (isalpha(letra))
+    {
+     rta=1;
+    }
     return rta;
 }
 
@@ -84,24 +94,25 @@ int contarCantidadPalabras(char texto[], int validos){
  cuando encuentro un caracter valido, empiezo a copiar todo lo que sigue hasta encontrar un nuevo caracter invalido
  dentro del arreglo "palabra" que tiene como propiedad la estructura "Termino" de cada posicion del arreglo.
 **/
-void textoToArregloTermino(char texto[], int validosT, Termino textoT[], int validos, int idDoc){
+void textoToArregloTermino(char texto[], int validos, Termino textoT[], int cantPalabras, int idDoc){
     int pos=0;
-
+    int i = 0;
     // printf("\n ValidosT: %i", validosT);
     // printf("\n Validos: %i", validos);
 
-    for(int i=0; i<validosT; i++){
-        if(pos<validos){ // validosT? Para que tome el salto de linea
-            while(validaChar(texto[i])==0 && i<validosT)
+    while(i<validos){
+        if(pos<cantPalabras){ // validosT? Para que tome el salto de linea
+            while(validaChar(texto[i])==0 && i<validos)
+            {
                 i++;
-
+            }
             int j=0;
             textoT[pos].idDOC = idDoc;
             textoT[pos].pos = pos+1;
             textoT[pos].palabra[j] = texto[i];
             i++;
             j++;
-            while(validaChar(texto[i])==1 && i<validosT){
+            while(validaChar(texto[i])==1 && i<validos){
                 textoT[pos].palabra[j] = texto[i];
                 i++;
                 j++;
@@ -109,6 +120,7 @@ void textoToArregloTermino(char texto[], int validosT, Termino textoT[], int val
             textoT[pos].palabra[j] = '\0';
             pos++;
         }
+            i++;
     }
 }
 
@@ -143,8 +155,8 @@ void guardarTextoEnArchivoDic(char archivo[], Termino palabras[], int validos){
         }
 
         if(fclose(arch) != 0)
-            errorCerrar();
+            printf("\n Error al cerrar el archivo!...\n");
     }
     else
-        errorAbrir();
+        printf("\n Error al abrir el archivo!...\n");
 }

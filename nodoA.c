@@ -7,63 +7,63 @@ nodoA *crearNodoA(char palabra[]){
     nodoA *nuevo = (nodoA*)malloc(sizeof(nodoA));
     strcpy(nuevo->palabra, palabra);
     nuevo->frecuencia = 1;
+    nuevo->ocurrencias = NULL;
     nuevo->izq = NULL;
     nuevo->der = NULL;
     return nuevo;
 }
 
-nodoA *insertarNodoA(nodoA *arbol, Termino nuevo){
-    if(arbol){
-        switch(strcmp(arbol->palabra, nuevo.palabra)){
+void insertarNodoA(nodoA** arbol, Termino nuevo){
+    if(*arbol){
+        switch(strcmp((*arbol)->palabra, nuevo.palabra)){
         case 1:
-            arbol->izq = insertarNodoA(arbol->izq, nuevo);
+            insertarNodoA(&((*arbol)->izq), nuevo);
             break;
         case -1:
-            arbol->der = insertarNodoA(arbol->der, nuevo);
+            insertarNodoA(&((*arbol)->der), nuevo);
             break;
         case 0:
-            arbol->frecuencia++;
-            arbol->ocurrencias = insertarNodoT(arbol->ocurrencias, crearNodoT(nuevo.idDOC, nuevo.pos));
+            (*arbol)->frecuencia++;
+            insertarNodoT(&((*arbol)->ocurrencias), crearNodoT(nuevo.idDOC, nuevo.pos));
             break;
         }
     }
     else{
-        arbol = crearNodoA(nuevo.palabra);
-        arbol->ocurrencias = crearNodoT(nuevo.idDOC, nuevo.pos);
+        *arbol = crearNodoA(nuevo.palabra);
+        (*arbol)->ocurrencias = crearNodoT(nuevo.idDOC, nuevo.pos);
     }
-    return arbol;
 }
 
-nodoA *crearArbolDiccionario(char diccionario[]){
+void crearArbolDiccionario(nodoA** arbol, char diccionario[]){
     FILE *arch = fopen(diccionario, "rb");
-    nodoA *arbol = NULL;
 
     if(arch){
         Termino leido;
 
         while(fread(&leido, sizeof(Termino), 1, arch)>0)
-            arbol = insertarNodoA(arbol, leido);
+        {
+            insertarNodoA(arbol, leido);
+        }
 
         if(fclose(arch) != 0)
-            errorCerrar();
+            printf("\n Error al cerrar el archivo!...\n");
     }
     else
-        errorAbrir();
-    return arbol;
+        printf("\n Error al abrir el archivo!...\n");
 }
 
-void mostrarNodoA(nodoA arbol){
-    printf("\n\n Palabra: %s", arbol.palabra);
-    printf("\n Frecuencia: %i", arbol.frecuencia);
+void mostrarNodoA(nodoA* arbol){
+    printf("\n\n Palabra: %s", arbol->palabra);
+    printf("\n Frecuencia: %i", arbol->frecuencia);
     printf("\n Ocurrencias: ");
-    mostrarListaNodoT(arbol.ocurrencias);
+    mostrarListaNodoT(arbol->ocurrencias);
 }
 
-void mostrarNodoAPreOrder(nodoA *arbol){
+void mostrarArbolInOrder(nodoA *arbol){
     if(arbol){
-        mostrarNodoA(*arbol);
-        mostrarNodoAPreOrder(arbol->izq);
-        mostrarNodoAPreOrder(arbol->der);
+        mostrarArbolInOrder(arbol->izq);
+        mostrarNodoA(arbol);
+        mostrarArbolInOrder(arbol->der);
     }
 }
 
@@ -88,7 +88,7 @@ nodoA *existeNodo(nodoA *arbol, char palabra[]){
 void buscarPalabra(nodoA *arbol, char palabra[]){
     nodoA *palabraNodo = existeNodo(arbol, palabra);
     if(palabraNodo)
-        mostrarNodoA(*palabraNodo);
+        mostrarNodoA(palabraNodo);
     else
         printf("\n La palabra no se encuentra en el diccionario!\n");
 }

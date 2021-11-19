@@ -6,19 +6,21 @@
 #include "Termino.h"
 #include "nodoT.h"
 #include "nodoA.h"
+#include "windows.h"
 
 int main()
 {
-
-
-    setlocale(LC_ALL, "spanish");
+    setlocale(LC_ALL, "spanish"); // Cambiar locale - Suficiente para máquinas Linux
+    SetConsoleCP(1252); // Cambiar STDIN -  Para máquinas Windows
+    SetConsoleOutputCP(1252); // Cambiar STDOUT - Para máquinas Windows
 
 
     // Abre el archivo 1 y lo pasa al archivo diccionario
 
-    int vali=strlen(generarStringTxt("prueba.bin")); //Hacer una funcion aparte para no llamar dos veces generarStringtxt (PENSAR)
-    char *texto = (char*)malloc(sizeof(char)*vali);  ///Hacer con malloc
-    strcpy(texto, generarStringTxt("prueba.bin"));
+    /*
+    int vali=dimensionArchivo("prueba.bin"); //Hacer una funcion aparte para no llamar dos veces generarStringtxt (PENSAR)
+    char *texto = (char*)malloc(sizeof(char)*vali);
+    strcpy(texto, generarStringTxt("prueba.bin", vali));
     printf("%d\n", vali);
     printf("%s", texto);
 
@@ -30,7 +32,7 @@ int main()
     mostrarArregloTermino(palabrasTexto1, cant);
     ///Texto 1 y arreglo de terminos del texto 1
     ///------------------------------------------------------------- TEXTO1
-
+    */
 
 
     /*int vali2=strlen(generarStringTxt("prueba2.bin"));
@@ -46,13 +48,14 @@ int main()
     ///------------------------------------------------------------- TEXTO2*/
 
 
-    /*nodoA *arbol = crearArbolDiccionario("diccionario.bin");
-
-    char palabra[40];
+    nodoA *arbol = NULL;
+    crearArbolDiccionario(&arbol,"diccionario.bin");
+    mostrarArbolInOrder(arbol);
+    char palabra[20];
     printf("\n Ingrese la palabra: ");
     fflush(stdin);
     gets(palabra);
-    buscarPalabra(arbol, palabra);*/
+    buscarPalabra(arbol, palabra);
 
 
 

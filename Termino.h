@@ -7,12 +7,10 @@ typedef struct {
   int pos; //incrementa palabra por palabra, y no letra por letra
 }Termino;
 
-void errorCerrar();
-void errorAbrir();
-
+int dimensionArchivo (char archivoTexto[]);
 // Abre el archivo bin de texto por parametro y lo retorna formando un string del tamaño total del texto.
 
-char *generarStringTxt(char archivoTexto[]);
+char *generarStringTxt(char archivoTexto[], int tamanio);
 
 // Compara los caracteres devolviendo 1 si es una letra valida, o 0 si es un caracter especial, espacio, etc...
 

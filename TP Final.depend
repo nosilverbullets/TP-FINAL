@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1637103864 source:c:\users\desktop\desktop\programacion ii\tp final\main.c
+1637179387 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp final\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -9,7 +9,34 @@
 	"nodoT.h"
 	"nodoA.h"
 
-1636845072 source:c:\users\octa\desktop\tp final\main.c
+1637179420 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp final\termino.h
+
+1637101625 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp final\nodot.h
+
+1636843225 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp final\nodoa.h
+	"nodoT.h"
+	"Termino.h"
+
+1637184671 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp final\nodoa.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"nodoA.h"
+
+1636840433 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp final\nodot.c
+	<stdio.h>
+	<stdlib.h>
+	"nodoT.h"
+
+1637184642 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp final\termino.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+
+1637285968 source:c:\users\desktop\desktop\tp final versiones\tp final 18 11\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -18,54 +45,28 @@
 	"Termino.h"
 	"nodoT.h"
 	"nodoA.h"
+	"windows.h"
 
-1636845042 source:c:\users\octa\desktop\tp final\termino.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<locale.h>
-	<ctype.h>
-	"Termino.h"
+1637266991 c:\users\desktop\desktop\tp final versiones\tp final 18 11\termino.h
 
-1636835472 c:\users\octa\desktop\tp final\termino.h
+1637270433 c:\users\desktop\desktop\tp final versiones\tp final 18 11\nodot.h
 
-1636837183 c:\users\octa\desktop\tp final\nodot.h
-
-1636840433 source:c:\users\octa\desktop\tp final\nodot.c
-	<stdio.h>
-	<stdlib.h>
-	"nodoT.h"
-
-1636843225 c:\users\octa\desktop\tp final\nodoa.h
+1637270195 c:\users\desktop\desktop\tp final versiones\tp final 18 11\nodoa.h
 	"nodoT.h"
 	"Termino.h"
 
-1636843250 source:c:\users\octa\desktop\tp final\nodoa.c
+1637285968 source:c:\users\desktop\desktop\tp final versiones\tp final 18 11\nodoa.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"nodoA.h"
 
-1636835472 c:\users\desktop\desktop\programacion ii\tp final\termino.h
-
-1637101625 c:\users\desktop\desktop\programacion ii\tp final\nodot.h
-
-1636843225 c:\users\desktop\desktop\programacion ii\tp final\nodoa.h
-	"nodoT.h"
-	"Termino.h"
-
-1637101632 source:c:\users\desktop\desktop\programacion ii\tp final\nodoa.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"nodoA.h"
-
-1636840433 source:c:\users\desktop\desktop\programacion ii\tp final\nodot.c
+1637271451 source:c:\users\desktop\desktop\tp final versiones\tp final 18 11\nodot.c
 	<stdio.h>
 	<stdlib.h>
 	"nodoT.h"
 
-1637103658 source:c:\users\desktop\desktop\programacion ii\tp final\termino.c
+1637272647 source:c:\users\desktop\desktop\tp final versiones\tp final 18 11\termino.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

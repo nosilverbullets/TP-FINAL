@@ -9,8 +9,8 @@ typedef struct nodoT
 }nodoT;
 
 nodoT *crearNodoT(int idDoc, int pos);
-nodoT *insertarNodoT(nodoT *lista, nodoT *nuevo);
-void mostrarNodoT(nodoT dato);
+void insertarNodoT(nodoT** lista, nodoT* nuevo);
+void mostrarNodoT(nodoT* dato);
 void mostrarListaNodoT(nodoT *lista);
 
 #endif // NODOT_H_INCLUDED
