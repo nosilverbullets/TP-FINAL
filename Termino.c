@@ -5,6 +5,57 @@
 #include <ctype.h>
 #include "Termino.h"
 
+void pedirNomTexto (char nomTexto[])
+{
+    printf("Ingrese el nombre del texto\n");
+    fflush(stdin);
+    gets(nomTexto);
+}
+int contarCantIdDoc (char archivo[])
+{
+    int idDoc = 0;
+    infoTexto a;
+    FILE* arch;
+    arch = fopen(archivo, "rb");
+    if (arch)
+    {
+        if (fread(&a, sizeof(infoTexto), 1, arch)>0)
+        {
+            fseek(arch, sizeof(infoTexto)*(-1), SEEK_END);
+            fread(&a, sizeof(infoTexto), 1, arch);
+            idDoc = a.idDOC;
+        }
+        fclose(arch);
+    }
+    return idDoc;
+}
+void guardarNomTextArchivo (char nomTexto [], char archivo[])
+{
+    infoTexto a;
+    FILE* arch = fopen(archivo, "ab");
+    if (arch)
+    {
+        strcpy(a.nomTexto, nomTexto);
+        a.idDOC = contarCantIdDoc(archivo);
+        a.idDOC +=1;
+        fwrite(&a, sizeof(infoTexto), 1, arch);
+        fclose(arch);
+    }
+}
+void recorrerArch (char archivo[])
+{
+    infoTexto a;
+    FILE* arch = fopen(archivo, "rb");
+    if (arch)
+    {
+        while (fread(&a, sizeof(infoTexto), 1, arch)>0)
+        {
+            printf("\nNombre del texto: %s\n", a.nomTexto);
+            printf("Id doc: %d\n", a.idDOC);
+        }
+        fclose(arch);
+    }
+}
 int dimensionArchivo (char archivoTexto[])
 {
     FILE* arch = fopen(archivoTexto, "rb");
@@ -66,7 +117,7 @@ int validaChar(char letra){
 // Genera el contador de palabras recorriendo el string de todo el texto, generado previamente
 // y descarta los espacios y caracteres especiales
 
-int contarCantidadPalabras(char texto[], int validos){
+int contarCantidadPalabras(char texto[], int validos){ ///validos = validos del texto
     int cant = 0;
     int i = 0;
     // printf("\nContarPalabras Validos: %i", validos);
@@ -95,32 +146,33 @@ int contarCantidadPalabras(char texto[], int validos){
  dentro del arreglo "palabra" que tiene como propiedad la estructura "Termino" de cada posicion del arreglo.
 **/
 void textoToArregloTermino(char texto[], int validos, Termino textoT[], int cantPalabras, int idDoc){
-    int pos=0;
+    int pos;
     int i = 0;
-    // printf("\n ValidosT: %i", validosT);
-    // printf("\n Validos: %i", validos);
 
-    while(i<validos){
-        if(pos<cantPalabras){ // validosT? Para que tome el salto de linea
-            while(validaChar(texto[i])==0 && i<validos)
-            {
-                i++;
-            }
-            int j=0;
+    for(pos = 0; pos < cantPalabras; pos++){
+
+        while(validaChar(texto[i])== 0 && i<validos)
+        {
+            i++;
+        }
+
+        if(i < validos)
+        {
+            int j = 0;
             textoT[pos].idDOC = idDoc;
             textoT[pos].pos = pos+1;
-            textoT[pos].palabra[j] = texto[i];
-            i++;
-            j++;
-            while(validaChar(texto[i])==1 && i<validos){
+//          textoT[pos].palabra[j] = texto[i]; /// no es necesario repetir esto primero, con el while ya alcanza
+//          i++;
+//          j++;
+            while(validaChar(texto[i])==1 && i<validos)
+            {
                 textoT[pos].palabra[j] = texto[i];
+                textoT[pos].palabra[j] = tolower(textoT[pos].palabra[j]);
                 i++;
                 j++;
             }
             textoT[pos].palabra[j] = '\0';
-            pos++;
         }
-            i++;
     }
 }
 

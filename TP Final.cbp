@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Termino.h" />
+		<Unit filename="funcionesUsuario.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="funcionesUsuario.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -42,12 +46,19 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="nodoA.h" />
+		<Unit filename="nodoFrase.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="nodoFrase.h" />
 		<Unit filename="nodoT.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="nodoT.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
+			<code_completion />
+			<envvars />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

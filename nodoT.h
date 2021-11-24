@@ -26,9 +26,7 @@ estamos bien
 hola como te va
  10   11    12
 hola como estas
-
 1      7  xx
 6      12  xx
 10     14      12
-
 hola   como    estas*/

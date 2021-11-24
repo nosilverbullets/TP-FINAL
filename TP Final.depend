@@ -36,7 +36,7 @@
 	<ctype.h>
 	"Termino.h"
 
-1637285968 source:c:\users\desktop\desktop\tp final versiones\tp final 18 11\main.c
+1637714554 source:d:\carla\documents\carla\utn\primer_anio\programacion_laboratorio\prog_y_lab_2\tpfinal\tp final\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -46,31 +46,102 @@
 	"nodoT.h"
 	"nodoA.h"
 	"windows.h"
+	<conio.h>
+	"nodoFrase.h"
 
-1637266991 c:\users\desktop\desktop\tp final versiones\tp final 18 11\termino.h
+1637616917 d:\carla\documents\carla\utn\primer_anio\programacion_laboratorio\prog_y_lab_2\tpfinal\tp final\termino.h
 
-1637270433 c:\users\desktop\desktop\tp final versiones\tp final 18 11\nodot.h
+1637632884 d:\carla\documents\carla\utn\primer_anio\programacion_laboratorio\prog_y_lab_2\tpfinal\tp final\nodot.h
 
-1637270195 c:\users\desktop\desktop\tp final versiones\tp final 18 11\nodoa.h
+1637616917 d:\carla\documents\carla\utn\primer_anio\programacion_laboratorio\prog_y_lab_2\tpfinal\tp final\nodoa.h
 	"nodoT.h"
 	"Termino.h"
 
-1637285968 source:c:\users\desktop\desktop\tp final versiones\tp final 18 11\nodoa.c
+1637651909 source:d:\carla\documents\carla\utn\primer_anio\programacion_laboratorio\prog_y_lab_2\tpfinal\tp final\nodoa.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"nodoA.h"
 
-1637271451 source:c:\users\desktop\desktop\tp final versiones\tp final 18 11\nodot.c
+1637616917 source:d:\carla\documents\carla\utn\primer_anio\programacion_laboratorio\prog_y_lab_2\tpfinal\tp final\nodot.c
 	<stdio.h>
 	<stdlib.h>
 	"nodoT.h"
 
-1637272647 source:c:\users\desktop\desktop\tp final versiones\tp final 18 11\termino.c
+1637687736 source:d:\carla\documents\carla\utn\primer_anio\programacion_laboratorio\prog_y_lab_2\tpfinal\tp final\termino.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<locale.h>
 	<ctype.h>
 	"Termino.h"
+
+1637689432 source:d:\carla\documents\carla\utn\primer_anio\programacion_laboratorio\prog_y_lab_2\tpfinal\tp final\nodofrase.c
+	"nodoFrase.h"
+
+1637689732 d:\carla\documents\carla\utn\primer_anio\programacion_laboratorio\prog_y_lab_2\tpfinal\tp final\nodofrase.h
+	<string.h>
+	<malloc.h>
+	<stdio.h>
+
+1637778544 source:c:\users\desktop\desktop\tp final versiones\tp final versioncarla\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+	"nodoFrase.h"
+	"funcionesUsuario.h"
+
+1637771904 c:\users\desktop\desktop\tp final versiones\tp final versioncarla\termino.h
+
+1637632884 c:\users\desktop\desktop\tp final versiones\tp final versioncarla\nodot.h
+
+1637616917 c:\users\desktop\desktop\tp final versiones\tp final versioncarla\nodoa.h
+	"nodoT.h"
+	"Termino.h"
+
+1637771071 c:\users\desktop\desktop\tp final versiones\tp final versioncarla\nodofrase.h
+	<string.h>
+	<malloc.h>
+	<stdio.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+
+1637778636 source:c:\users\desktop\desktop\tp final versiones\tp final versioncarla\nodoa.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"nodoA.h"
+
+1637770974 source:c:\users\desktop\desktop\tp final versiones\tp final versioncarla\nodofrase.c
+	"nodoFrase.h"
+
+1637616917 source:c:\users\desktop\desktop\tp final versiones\tp final versioncarla\nodot.c
+	<stdio.h>
+	<stdlib.h>
+	"nodoT.h"
+
+1637778513 source:c:\users\desktop\desktop\tp final versiones\tp final versioncarla\termino.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+
+1637778636 source:c:\users\desktop\desktop\tp final versiones\tp final versioncarla\funcionesusuario.c
+	"funcionesUsuario.h"
+
+1637778636 c:\users\desktop\desktop\tp final versiones\tp final versioncarla\funcionesusuario.h
+	"nodoA.h"
+	"nodoFrase.h"
 

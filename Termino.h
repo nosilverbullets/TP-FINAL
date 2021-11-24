@@ -6,7 +6,15 @@ typedef struct {
   int idDOC;
   int pos; //incrementa palabra por palabra, y no letra por letra
 }Termino;
+typedef struct {
+    char nomTexto [20];
+    int idDOC;
+}infoTexto;
 
+void pedirNomTexto (char archTexto[]);
+int contarCantIdDoc (char archivo[]);
+void guardarNomTextArchivo (char archTexto [], char archivo[]);
+void recorrerArch (char archivo[]);
 int dimensionArchivo (char archivoTexto[]);
 // Abre el archivo bin de texto por parametro y lo retorna formando un string del tamaño total del texto.
 

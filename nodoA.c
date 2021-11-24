@@ -61,8 +61,8 @@ void mostrarNodoA(nodoA* arbol){
 
 void mostrarArbolInOrder(nodoA *arbol){
     if(arbol){
-        mostrarArbolInOrder(arbol->izq);
         mostrarNodoA(arbol);
+        mostrarArbolInOrder(arbol->izq);
         mostrarArbolInOrder(arbol->der);
     }
 }
@@ -85,12 +85,6 @@ nodoA *existeNodo(nodoA *arbol, char palabra[]){
     return aRetornar;
 }
 
-void buscarPalabra(nodoA *arbol, char palabra[]){
-    nodoA *palabraNodo = existeNodo(arbol, palabra);
-    if(palabraNodo)
-        mostrarNodoA(palabraNodo);
-    else
-        printf("\n La palabra no se encuentra en el diccionario!\n");
-}
+
 
 //void mostrarTextoUnico
