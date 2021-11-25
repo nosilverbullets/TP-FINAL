@@ -44,16 +44,22 @@ void guardarNomTextArchivo (char nomTexto [], char archivo[])
 }
 void recorrerArch (char archivo[])
 {
+    int flag = 0;
     infoTexto a;
     FILE* arch = fopen(archivo, "rb");
     if (arch)
     {
         while (fread(&a, sizeof(infoTexto), 1, arch)>0)
         {
+            flag = 1;
             printf("\nNombre del texto: %s\n", a.nomTexto);
             printf("Id doc: %d\n", a.idDOC);
         }
         fclose(arch);
+    }
+    if (flag == 0)
+    {
+        printf("El archivo no tiene textos cargados! \n");
     }
 }
 int dimensionArchivo (char archivoTexto[])

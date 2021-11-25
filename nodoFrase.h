@@ -28,5 +28,6 @@ char* validarPalabra(char* palabra, int dim);
 int leerPalabra(char *palabra);
 void ingresarFrase(nodoFrase** lista);
 nodoT* buscarListaOcurrenciasPalabra(nodoA *arbol, char *palabra);
+int _buscaPalabrasMismoDoc(int idDOC, nodoFrase* listaP, nodoA* arbol);
 int _buscarFrase(int idDOC, int pos, nodoFrase* lista, nodoA* arbol);
 #endif // NODOFRASE_H_INCLUDED
