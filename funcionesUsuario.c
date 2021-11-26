@@ -120,7 +120,6 @@ int buscaPalabrasMismoDoc(nodoA* arbol, nodoFrase* listaP){
                     while (listaPalabra->idDOC == auxId && encontrado == 0){
                         listaPalabra = listaPalabra->sig;
                     }
-
                 }
             }
         }

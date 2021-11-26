@@ -125,6 +125,10 @@ void menuUsuario ()
             {
                 mostrarFraseEncontrada(lista);
             }
+            else
+            {
+                printf("Palabras no encontradas o mal escritas\n");
+            }
             liberarFrase(&lista);
             break;
         case 4:
@@ -134,6 +138,10 @@ void menuUsuario ()
             if (fraseEncontrada)
             {
                 mostrarFraseEncontrada(lista);
+            }
+            else
+            {
+                printf("Frase no encontrada o mal escrita\n");
             }
             liberarFrase(&lista);
             break;
