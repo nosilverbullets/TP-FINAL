@@ -285,3 +285,82 @@
 	"nodoFrase.h"
 	"funcionesUsuario.h"
 
+1637878581 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\funcionesusuario.c
+	"funcionesUsuario.h"
+
+1637877939 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\funcionesusuario.h
+	"nodoA.h"
+	"nodoFrase.h"
+
+1637616917 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodoa.h
+	"nodoT.h"
+	"Termino.h"
+
+1637632884 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodot.h
+
+1637771904 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\termino.h
+
+1637852943 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodofrase.h
+	<string.h>
+	<malloc.h>
+	<stdio.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+
+1637877587 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+	"nodoFrase.h"
+	"funcionesUsuario.h"
+	"menu.h"
+
+1637859402 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\menu.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+	"nodoFrase.h"
+	"funcionesUsuario.h"
+
+1637778636 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodoa.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"nodoA.h"
+
+1637852943 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodofrase.c
+	"nodoFrase.h"
+
+1637616917 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodot.c
+	<stdio.h>
+	<stdlib.h>
+	"nodoT.h"
+
+1637868005 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\termino.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+
+1637879369 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\menu.c
+	"menu.h"
+

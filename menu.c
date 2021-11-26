@@ -136,6 +136,10 @@ void menuUsuario ()
             system("pause");
             system("cls");
             break;
+        case 0:
+            printf("\n****GRACIAS VUELVA PRONTOS****\n");
+            exit(0);
+
         default:
             printf("\n***OPCION INCORRECTA***\n");
             printf("\n");
