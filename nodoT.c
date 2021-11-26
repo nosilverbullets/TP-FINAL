@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "nodoT.h"
 
-/// Funciones lista de nodoT, idDoc y pos
+/// Funciones lista de nodoT, idDoc y pos.
 
 nodoT *crearNodoT(int idDoc, int pos){
     nodoT *nuevo = (nodoT*)malloc(sizeof(nodoT));
@@ -26,13 +26,13 @@ void insertarNodoT(nodoT** lista, nodoT* nuevo){
     else
         *lista = nuevo;
 }
-
+///Aux de prints del nodoT
 void mostrarNodoT(nodoT* dato){
     printf("\n");
-    printf("[ Id Documento: %i", dato->idDOC);
-    printf(" Posicion: %i ]", dato->pos);
+    printf("\t    [Id Documento: %i", dato->idDOC);
+    printf(" Posicion: %i]", dato->pos);
 }
-
+///Función recursiva de muestra de una lista de nodoT
 void mostrarListaNodoT(nodoT *lista){
     if(lista){
         mostrarNodoT(lista);

@@ -1,66 +1,39 @@
-
 #include "funcionesUsuario.h"
 
-/// INCISO 1) Buscar el termino en alguno de los docs. (muestra tanto si esta en uno solo � en todos).
-void buscarPalabra(nodoA *arbol, char palabra[])
+///Funcion auxiliar para verificar si la palabra está en el diccionario. Utilizada en diferentes incisos
+int verificarPalabra (nodoA* arbol, char palabra[])
+{
+    int flag = 0;
+    nodoA* palabraNodo = existeNodo(arbol, palabra);
+    if (!palabraNodo)
+    {
+        flag = 1;
+        printf("\nLa palabra no se encuentra en el diccionario!\n");
+        printf("\nIngrese nuevamente.\n");
+    }
+    return flag;
+}
+
+/// INCISO 1) Buscar el termino en alguno de los docs. (muestra tanto si esta en uno solo o en todos).
+void buscarPalabra(nodoA* arbol, char palabra[])
 {
     nodoA *palabraNodo = existeNodo(arbol, palabra);
     if(palabraNodo)
         mostrarNodoA(palabraNodo);
     else
-        printf("\n La palabra no se encuentra en el diccionario!\n");
+        printf("\nLa palabra no se encuentra en el diccionario!\n");
 }
-/// INCISO 2) Buscar todas las apariciones de un t�rmino en un documento y otro  (operacion and).
-void verificarIdIngresado (int* idBusqueda1, int* idBusqueda2)
+/// INCISO 2) Buscar todas las apariciones de un termino en un documento y otro  (operacion and).
+int verificarIdIngresado (int idBusqueda)
 {
     int flag = 0;
-    do
+    if (idBusqueda <= 0 || idBusqueda > contarCantIdDoc(NOMBRESTEXTOS))
     {
-        flag = 0;
-        printf("Primer idDoc\n");
-        scanf("%d", idBusqueda1);
-        if (*idBusqueda1 <=0 && *idBusqueda1 > contarCantIdDoc(NOMBRESTEXTOS))
-        {
-            printf("ID NO VALIDO!\n");
-            printf("Vuelva a ingresarlo.\n");
-            flag = 1;
-        }
-    } while (flag!=0);
-
-    do
-    {
-        flag = 0;
-        printf("Segundo idDoc\n");
-        scanf("%d", idBusqueda2);
-        if (*idBusqueda2 < 1 && *idBusqueda2 > contarCantIdDoc(NOMBRESTEXTOS))
-        {
-            printf("ID NO VALIDO!\n");
-            printf("Vuelva a ingresarlo.\n");
-            flag = 1;
-        }
-    } while (flag!=0);
-
-}
-void buscarPalabraPorAnd (nodoA* arbol, char palabra[], int idDoc1, int idDoc2)
-{
-    nodoA* palabraNodo = existeNodo(arbol, palabra);
-    if (palabraNodo)
-    {
-        nodoT* ocurrencias = palabraNodo->ocurrencias;
-
-        int encontradoId1 = buscarIdOcurrencias(ocurrencias, idDoc1);
-        printf("AAA %d\n", encontradoId1);
-        int encontradoId2 = buscarIdOcurrencias(ocurrencias, idDoc2);
-        printf("BBB %d\n", encontradoId2);
-        if (encontradoId1 == 1 && encontradoId2 == 1)
-        {
-            mostrarNodoAAND(palabraNodo, idDoc1, idDoc2);
-        }
-        else
-        {
-            printf("\nLa palabra no se encuentra en los dos documentos!\n");
-        }
+        printf("ID NO VALIDO!\n");
+        printf("\tVuelva a ingresarlo.\n");
+        flag = 1;
     }
+    return flag;
 }
 int buscarIdOcurrencias (nodoT* ocurrencias, int idDoc)
 {
@@ -75,10 +48,29 @@ int buscarIdOcurrencias (nodoT* ocurrencias, int idDoc)
     }
     return flag;
 }
+void buscarPalabraPorAnd (nodoA* arbol, char palabra[], int idDoc1, int idDoc2)
+{
+    nodoA* palabraNodo = existeNodo(arbol, palabra);
+    if (palabraNodo)
+    {
+        nodoT* ocurrencias = palabraNodo->ocurrencias;
+
+        int encontradoId1 = buscarIdOcurrencias(ocurrencias, idDoc1);
+        int encontradoId2 = buscarIdOcurrencias(ocurrencias, idDoc2);
+        if (encontradoId1 == 1 && encontradoId2 == 1)
+        {
+            printf("\nPalabra encontrada en los documentos %d y %d\n", idDoc1, idDoc2);
+            mostrarNodoAAND(palabraNodo, idDoc1, idDoc2);
+        }
+        else
+        {
+            printf("\nLa palabra no se encuentra en los dos documentos!\n");
+        }
+    }
+}
 void mostrarNodoAAND(nodoA* arbol, int id1, int id2)
 {
-    printf("\n\n Palabra: %s", arbol->palabra);
-    //printf("\n Frecuencia: %i", arbol->frecuencia);  //VER COMO MOSTRAR SOLO LA FRECUENCIA ENTRE LOS DOS DOCUMENTOS
+    printf("\n Palabra: %s", arbol->palabra);
     printf("\n Ocurrencias: ");
     mostrarListaNodoTAND(arbol->ocurrencias, id1, id2);
 }
@@ -94,38 +86,114 @@ void mostrarListaNodoTAND(nodoT *lista, int id1, int id2)
         mostrarListaNodoTAND(lista->sig, id1, id2);
     }
 }
-/// INCISO 3 : Buscar la aparici�n de m�s de un t�rmino en el mismo documento.
-
-
-
-int buscaPalabrasMismoDoc(nodoA* arbol, nodoFrase* listaP)
-{
+/// INCISO 3 : Buscar la aparicion de mas de un termino en el mismo documento.
+int buscaPalabrasMismoDoc(nodoA* arbol, nodoFrase* listaP){
 
     int encontrado = 0;
 
-    if (listaP && arbol)  //Si la lista con la frase o el �rbol est�n vac�os, salgo.
-    {
-        //Busco la primer palabra en el arbol y retorna la lista de ocurrencias de dicha palabra o un NULL.
+    if (listaP && arbol){  //Si la lista con palabras o el arbol estan vacios, salgo.
+
+        //Busco la primer palabra en el arbol y retorno la lista de ocurrencias de dicha palabra o un NULL.
         nodoT* listaPalabra = buscarListaOcurrenciasPalabra(arbol, listaP->palabra);
 
-        if (listaPalabra)  //Si encuentro la primer palabra.
-        {
-
-            if (listaP->sig == NULL)     //La frase era una sola palabra y la encontr�.
-            {
+        if (listaPalabra) { //Si encuentro la primer palabra.
+            if (listaP->sig == NULL){     //La frase era una sola palabra y la encontro.
                 encontrado = 1;
-            }
-            else
-            {
+                listaP->idDOC = listaPalabra->idDOC;
+                listaP->pos = listaPalabra->pos;
+            } else {
                 nodoFrase* primero = listaP; // guardo el primer nodo de la frase antes de avanzar para setear los valores luego
-
+                listaP = listaP->sig;
                 //Busco con cada ocurrencia de la primer palabra, si hay match con el resto de las palabras y sus ocurrencias.
-                while(listaPalabra && encontrado == 0)
-                {
-                    encontrado = _buscaPalabrasMismoDoc(listaPalabra->idDOC, listaP->sig, arbol);
+                while(listaPalabra && encontrado == 0){
+                    encontrado = _buscaPalabrasMismoDoc(listaPalabra->idDOC, listaP, arbol);
 
-                    if (encontrado == 1)    //Si encuentra un match, setteo los valores de la primer palabra.
-                    {
+                    if (encontrado == 1){    //Si encuentra un match, setteo los valores de la primer palabra.
+                        primero->idDOC = listaPalabra->idDOC;
+                        primero->pos = listaPalabra->pos;
+                    }
+
+                    //Si no hubo match, voy a pasar a buscar un match con la siguiente ocurrencia de la primer palabra
+                    //que le cambia el id.
+                    int auxId = listaPalabra->idDOC;
+                    //Avanzo hasta pasar todas las ocurrencias con el mismo Id que no hubo match.
+                    while (listaPalabra->idDOC == auxId && encontrado == 0){
+                        listaPalabra = listaPalabra->sig;
+                    }
+
+                }
+            }
+        }
+    }
+
+    return encontrado;
+}
+///Inciso 3 funcion auxiliar
+int _buscaPalabrasMismoDoc(int idDOC, nodoFrase* listaP, nodoA* arbol){
+    int encontrado = 0;
+    int exitFlag = 0;
+
+    //Recorro la lista con la frase a encontrar.
+    while (listaP && exitFlag == 0){
+
+        // Setteo encontrado en 0 aca, para cada nueva busqueda
+        encontrado = 0;
+        //Busco la lista de ocurrencias de la palabra actual en el arbol.
+        nodoT* nodoPalabra = buscarListaOcurrenciasPalabra(arbol, listaP->palabra);
+
+        //Comparo si de esa lista, alguna de las ocurrencias matchean con el id y la posición contigua.
+        while(nodoPalabra && nodoPalabra->idDOC < idDOC){ // Si el idDOC de la lista se mantiene menor al del parametro
+                                                          // avanzo en la lista de ocurrencias
+                nodoPalabra = nodoPalabra->sig;
+        }
+
+        if(nodoPalabra && idDOC == nodoPalabra->idDOC){ // Significa que hubo match
+                //Guardo en la lista los datos del match.
+                listaP->idDOC = nodoPalabra->idDOC;
+                listaP->pos = nodoPalabra->pos;
+
+                encontrado = 1;
+        }
+
+        //De no encontrar un match, corto el while con el exitFlag.
+        if (encontrado == 0){
+            exitFlag = 1;
+        } else {
+            //Si no, avanzo en la lista hacia la siguiente palabra de la frase.
+            listaP = listaP->sig;
+
+        }
+    }
+
+    return encontrado;
+}
+/**
+ *  INCISO 4: Busca una frase en un arbol, pasandole una lista con dicha frase. Retorna si encontro o no la frase. La lista
+ *  queda setteado con los valores donde fueron hallados.
+ */
+int buscarFrase(nodoA* arbol, nodoFrase* listaF){
+
+    int encontrado = 0;
+
+    if (listaF && arbol){  //Si la lista con la frase o el arbol estan vacios, salgo.
+
+        //Busco la primer palabra en el arbol y retorno la lista de ocurrencias de dicha palabra o un NULL.
+        nodoT* listaPalabra = buscarListaOcurrenciasPalabra(arbol, listaF->palabra);
+
+        if (listaPalabra){  //Si encuentro la primer palabra.
+
+            if (listaF->sig == NULL){     //La frase era una sola palabra y la encontro.
+                encontrado = 1;
+                listaF->idDOC = listaPalabra->idDOC;
+                listaF->pos = listaPalabra->pos;
+            } else {
+                nodoFrase* primero = listaF; // guardo el primer nodo de la frase antes de avanzar para setear los valores luego
+                listaF = listaF->sig;
+                //Busco con cada ocurrencia de la primer palabra, si hay match con el resto de las palabras y sus ocurrencias.
+                while(listaPalabra && encontrado == 0){
+                    encontrado = _buscarFrase(listaPalabra->idDOC, listaPalabra->pos, listaF, arbol);
+
+                    if (encontrado == 1){    //Si encuentra un match, setteo los valores de la primer palabra.
                         primero->idDOC = listaPalabra->idDOC;
                         primero->pos = listaPalabra->pos;
                     }
@@ -139,122 +207,136 @@ int buscaPalabrasMismoDoc(nodoA* arbol, nodoFrase* listaP)
     return encontrado;
 }
 /**
- *  INCISO 4: Busca una frase en un �rbol, pas�ndole una lista con dicha frase. Retorna si encontr� o no la frase. La lista
- *  queda setteado con los valores donde fueron hallados.
+ *  Función auxiliar que se utiliza en la función buscarFrase() para hallar desde la segunda palabra en adelante
+ *  si la frase existe en el diccionario. Recibe el idDOC y pos de la primer palabra, la lista que contiene
+ *  la frase (sin la primer palabra) y el arbol para buscar.
  */
-int buscarFrase(nodoA* arbol, nodoFrase* listaF)
-{
-
+int _buscarFrase(int idDOC, int pos, nodoFrase* listaF, nodoA* arbol){
     int encontrado = 0;
+    int exitFlag = 0;
 
-    if (listaF && arbol)  //Si la lista con la frase o el �rbol est�n vac�os, salgo.
-    {
-        //Busco la primer palabra en el arbol y retorna la lista de ocurrencias de dicha palabra o un NULL.
-        nodoT* listaPalabra = buscarListaOcurrenciasPalabra(arbol, listaF->palabra);
+    //Recorro la lista con la frase a encontrar.
+    while (listaF && exitFlag == 0){
 
-        if (listaPalabra)  //Si encuentro la primer palabra.
-        {
+        // Seteo encontrado en 0 aca, para cada nueva busqueda
+        encontrado = 0;
+        //Busco la lista de ocurrencias de la palabra actual en el arbol.
+        nodoT* nodoPalabra = buscarListaOcurrenciasPalabra(arbol, listaF->palabra);
 
-            if (listaF->sig == NULL)     //La frase era una sola palabra y la encontr�.
-            {
+        //Comparo si de esa lista, alguna de las ocurrencias matchean con el id y la posición contigua.
+        while(nodoPalabra && nodoPalabra->idDOC < idDOC){ // Si el idDOC de la lista se mantiene menor al del parametro
+                                                          // avanzo en la lista de ocurrencias
+                nodoPalabra = nodoPalabra->sig;
+        }
+
+        while(nodoPalabra && idDOC == nodoPalabra->idDOC && nodoPalabra->pos < pos){
+
+                nodoPalabra = nodoPalabra->sig;
+        }
+        if(nodoPalabra && idDOC == nodoPalabra->idDOC && nodoPalabra->pos == pos + 1){ // Significa que hubo match
+                //Guardo en la lista los datos del match.
+                listaF->idDOC = nodoPalabra->idDOC;
+                listaF->pos = nodoPalabra->pos;
+
                 encontrado = 1;
-            }
-            else
-            {
-                nodoFrase* primero = listaF; // guardo el primer nodo de la frase antes de avanzar para setear los valores luego
+        }
 
-                //Busco con cada ocurrencia de la primer palabra, si hay match con el resto de las palabras y sus ocurrencias.
-                while(listaPalabra && encontrado == 0)
-                {
-                    encontrado = _buscarFrase(listaPalabra->idDOC, listaPalabra->pos, listaF->sig, arbol);
+        //De no encontrar un match, corto el while con el exitFlag.
+        if (encontrado == 0){
+            exitFlag = 1;
+        } else {
+            //Si no, avanzo en la lista hacia la siguiente palabra de la frase.
+            listaF = listaF->sig;
 
-                    if (encontrado == 1)    //Si encuentra un match, setteo los valores de la primer palabra.
-                    {
-                        primero->idDOC = listaPalabra->idDOC;
-                        primero->pos = listaPalabra->pos;
-                    }
-                    //Si no hubo match, voy a pasar a buscar un match con la siguiente ocurrencia de la primer palabra.
-                    listaPalabra = listaPalabra->sig;
-                }
-            }
+            //Aumento la posición para que la siguiente palabra buscada sea contigua a esta.
+            pos++;
         }
     }
 
     return encontrado;
 }
-
 ///Inciso 5: Buscar la palabra de más frecuencia que aparece en alguno de los docs.
+void _mayorFrecuenciaDoc(nodoA* arbol, nodoA** mayorFrec, int idDoc, int* maxFrec){
+    if (arbol){
 
-void mayorFrecuenciaDoc(nodoA* arbol, int idDoc, int* frecuencia, nodoA* mayorFrec)
-{
-    int mayor;
-    //nodoA* nodoFrecuente;
-    if(arbol)
-    {
+        _mayorFrecuenciaDoc(arbol->izq, mayorFrec, idDoc, maxFrec);
+        _mayorFrecuenciaDoc(arbol->der, mayorFrec, idDoc, maxFrec);
 
-        mayorFrecuenciaDoc(arbol->izq, idDoc, frecuencia, mayorFrec);
-        mayorFrecuenciaDoc(arbol->der, idDoc, frecuencia, mayorFrec);
+        int frecActual, frecMayor;
+        frecActual = cuentaFrecuenciaOcurrencias(arbol->ocurrencias, idDoc);
+        frecMayor = cuentaFrecuenciaOcurrencias((*mayorFrec)->ocurrencias, idDoc);
 
-        mayor = cuentaFrecuenciaOcurrencias(arbol->ocurrencias, idDoc);
-        if(mayor > *frecuencia){
-            *frecuencia = mayor;
-            mayorFrec = arbol;
+        if (frecActual > frecMayor){
+            //Setteo el nodo
+            *mayorFrec = arbol;
+
+            //Setteo la frecuencia máxima únicamente a la frecuencia en ese idDoc
+            *maxFrec = frecActual;
         }
     }
-
-    //return nodoFrecuente;
 }
 
-nodoA* mayorFrecuenciaPalabra(nodoA* arbol, int idDoc){
-    nodoA* nodoFrecuente;
+nodoA* mayorFrecuenciaDoc(nodoA* arbol, int idDoc){
+    nodoA* mayorFrec = NULL;
+    int maxFrec;
 
-    int frecuencia;
-    if(arbol){
-        nodoFrecuente = arbol;
-        frecuencia = cuentaFrecuenciaOcurrencias(arbol->ocurrencias, idDoc);
+    if (arbol){
 
-        mayorFrecuenciaDoc(arbol->izq, idDoc, &frecuencia, nodoFrecuente);
-        mayorFrecuenciaDoc(arbol->der, idDoc, &frecuencia, nodoFrecuente);
-        //printf("%s", nodoFrecuente->palabra);
-    }else{
-        nodoFrecuente = NULL;
+        //Inicializo para tener un punto de inicio
+        mayorFrec = arbol;
+
+        //Seteo nodo con mayor frecuencia.
+        _mayorFrecuenciaDoc(arbol, &mayorFrec, idDoc, &maxFrec);
+
+        //Guardo la lista de ocurrencias para poder mostrar todas las ocurrencias
+        nodoT* aux = mayorFrec->ocurrencias;
+
+        //Creo un nodo nuevo con la palabra para no modificar el nodo del árbol
+        mayorFrec = crearNodoA(mayorFrec->palabra);
+
+        //Setteo la frencuencia
+        mayorFrec->frecuencia = maxFrec;
+
+        //Setteo las ocurrencias
+        mayorFrec->ocurrencias = aux;
     }
 
-    return nodoFrecuente;
+    return mayorFrec;
 }
 
-//int cuentaFrecuenciaOcurrencias (nodoT* ocurrencias, int idDoc)
-//{
-//    int contador = 0;
-//    while (ocurrencias && ocurrencias->idDOC < idDoc)
-//    {
-//        ocurrencias = ocurrencias->sig;
-//    }
-//
-//    while (ocurrencias && ocurrencias->idDOC == idDoc)
-//    {
-//        contador ++;
-//        ocurrencias = ocurrencias->sig;
-//    }
-//    ocurrencias = ocurrencias->sig;
-//    return contador;
-//}
-
-
-int cuentaFrecuenciaOcurrencias (nodoT* ocurrencias, int idDoc)
-{
+int cuentaFrecuenciaOcurrencias (nodoT* ocurrencias, int idDoc){
     int contador = 0;
-
-    while (ocurrencias){
-        if(ocurrencias->idDOC == idDoc)
-        {
-            contador ++;
-        }
+    while (ocurrencias && ocurrencias->idDOC < idDoc){
         ocurrencias = ocurrencias->sig;
     }
+
+    while (ocurrencias && ocurrencias->idDOC == idDoc){
+        contador ++;
+        ocurrencias = ocurrencias->sig;
+    }
+
     return contador;
 }
 
+void mostrarNodoAFREC(nodoA* arbol, int id)
+{
+    printf("\n Palabra: %s", arbol->palabra);
+    printf("\n Frecuencia en el ID %d : %d", id, arbol->frecuencia);
+    printf("\n Ocurrencias: ");
+    mostrarListaNodoTFREC(arbol->ocurrencias, id);
+}
+
+void mostrarListaNodoTFREC(nodoT *lista, int id)
+{
+    if(lista)
+    {
+        if (lista->idDOC == id)
+        {
+            mostrarNodoT(lista);
+        }
+        mostrarListaNodoTFREC(lista->sig, id);
+    }
+}
 ///Inciso 6: Utilizar la distancia de levenshtein en el ingreso de una palabra y sugerir similares a partir de una distancia <= 3.
 int Minimo (int a, int b, int c)
 {
@@ -314,14 +396,15 @@ int Levenshtein(char *s1,char *s2)
     return(res);
 }
 
-void sugierePalabrasSimilares (nodoA* arbol, char* palabra)
+void sugierePalabrasSimilares (nodoA* arbol, char* palabra) //Funcion que llama a levenshtein y muestra por pantalla las palabras con distancia <=3 a la palabra buscada
 {
     if (arbol)
     {
-        sugierePalabrasSimilares(arbol->izq, palabra);
+        sugierePalabrasSimilares(arbol->izq, palabra); //El recorrido del arbol es inOrder
         if (Levenshtein(arbol->palabra, palabra)<=3)
         {
-            printf("%s-", arbol->palabra);
+            printf("[ %s ] ", arbol->palabra);
+            printf("\n");
         }
         sugierePalabrasSimilares(arbol->der, palabra);
     }

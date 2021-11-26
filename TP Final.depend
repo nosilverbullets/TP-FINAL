@@ -285,32 +285,7 @@
 	"nodoFrase.h"
 	"funcionesUsuario.h"
 
-1637878581 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\funcionesusuario.c
-	"funcionesUsuario.h"
-
-1637877939 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\funcionesusuario.h
-	"nodoA.h"
-	"nodoFrase.h"
-
-1637616917 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodoa.h
-	"nodoT.h"
-	"Termino.h"
-
-1637632884 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodot.h
-
-1637771904 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\termino.h
-
-1637852943 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodofrase.h
-	<string.h>
-	<malloc.h>
-	<stdio.h>
-	"Termino.h"
-	"nodoT.h"
-	"nodoA.h"
-	"windows.h"
-	<conio.h>
-
-1637877587 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\main.c
+1637895357 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -325,7 +300,29 @@
 	"funcionesUsuario.h"
 	"menu.h"
 
-1637859402 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\menu.h
+1637900774 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\termino.h
+
+1637632884 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\nodot.h
+
+1637899974 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\nodoa.h
+	"nodoT.h"
+	"Termino.h"
+
+1637901136 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\nodofrase.h
+	<string.h>
+	<malloc.h>
+	<stdio.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+
+1637902261 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\funcionesusuario.h
+	"nodoA.h"
+	"nodoFrase.h"
+
+1637859402 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -339,21 +336,21 @@
 	"nodoFrase.h"
 	"funcionesUsuario.h"
 
-1637778636 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodoa.c
+1637900749 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\nodoa.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"nodoA.h"
 
-1637852943 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodofrase.c
+1637901634 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\nodofrase.c
 	"nodoFrase.h"
 
-1637616917 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\nodot.c
+1637899820 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\nodot.c
 	<stdio.h>
 	<stdlib.h>
 	"nodoT.h"
 
-1637868005 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\termino.c
+1637900581 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\termino.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -361,6 +358,167 @@
 	<ctype.h>
 	"Termino.h"
 
-1637879369 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 casi final\menu.c
+1637902488 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\funcionesusuario.c
+	"funcionesUsuario.h"
+
+1637903107 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 casi final\menu.c
+	"menu.h"
+
+1637903107 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\menu.c
+	"menu.h"
+
+1637859402 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\menu.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+	"nodoFrase.h"
+	"funcionesUsuario.h"
+
+1637900774 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\termino.h
+
+1637632884 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\nodot.h
+
+1637899974 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\nodoa.h
+	"nodoT.h"
+	"Termino.h"
+
+1637933122 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\nodofrase.h
+	<string.h>
+	<malloc.h>
+	<stdio.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+
+1637902261 d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\funcionesusuario.h
+	"nodoA.h"
+	"nodoFrase.h"
+
+1637900749 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\nodoa.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"nodoA.h"
+
+1637899820 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\nodot.c
+	<stdio.h>
+	<stdlib.h>
+	"nodoT.h"
+
+1637900581 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\termino.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+
+1637903489 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\funcionesusuario.c
+	"funcionesUsuario.h"
+
+1637895357 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+	"nodoFrase.h"
+	"funcionesUsuario.h"
+	"menu.h"
+
+1637903489 source:d:\facultad\programacion y laboratorio\programacion y laboratorio 2\tpfinal\tp-final version 25 11 final (faltan comentarios)\nodofrase.c
+	"nodoFrase.h"
+
+1637949988 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\funcionesusuario.c
+	"funcionesUsuario.h"
+
+1637949988 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\funcionesusuario.h
+	"nodoA.h"
+	"nodoFrase.h"
+
+1637899974 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\nodoa.h
+	"nodoT.h"
+	"Termino.h"
+
+1637632884 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\nodot.h
+
+1637944855 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\termino.h
+
+1637933122 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\nodofrase.h
+	<string.h>
+	<malloc.h>
+	<stdio.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+
+1637941652 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+	"nodoFrase.h"
+	"funcionesUsuario.h"
+	"menu.h"
+
+1637859402 c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\menu.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+	"nodoT.h"
+	"nodoA.h"
+	"windows.h"
+	<conio.h>
+	"nodoFrase.h"
+	"funcionesUsuario.h"
+
+1637946897 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\nodoa.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"nodoA.h"
+
+1637903489 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\nodofrase.c
+	"nodoFrase.h"
+
+1637933122 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\nodot.c
+	<stdio.h>
+	<stdlib.h>
+	"nodoT.h"
+
+1637944855 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\termino.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
+	"Termino.h"
+
+1637949988 source:c:\users\desktop\desktop\tp final versiones\tp-final version 25 11 final (faltan comentarios)\menu.c
 	"menu.h"
 

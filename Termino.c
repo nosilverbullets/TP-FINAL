@@ -5,12 +5,15 @@
 #include <ctype.h>
 #include "Termino.h"
 
+/// Funcion que pide el nombre del texto por consola.
 void pedirNomTexto (char nomTexto[])
 {
-    printf("Ingrese el nombre del texto\n");
+    printf("\tIngrese el nombre del texto\n");
     fflush(stdin);
     gets(nomTexto);
 }
+
+/// Funcion que abre el archivo de nombresTextos para su lectura, y así determinar la cantidad de idDocs cargados.
 int contarCantIdDoc (char archivo[])
 {
     int idDoc = 0;
@@ -25,10 +28,15 @@ int contarCantIdDoc (char archivo[])
             fread(&a, sizeof(infoTexto), 1, arch);
             idDoc = a.idDOC;
         }
-        fclose(arch);
+        if(fclose(arch) != 0)
+            printf("\nError al cerrar el archivo!...\n");
     }
+    else
+        printf("\nError al abrir el archivo!...\n");
     return idDoc;
 }
+
+/// El nombre ingresado por consola se guarda junto con su idDoc en el archivo de nombresTextos.
 void guardarNomTextArchivo (char nomTexto [], char archivo[])
 {
     infoTexto a;
@@ -36,12 +44,17 @@ void guardarNomTextArchivo (char nomTexto [], char archivo[])
     if (arch)
     {
         strcpy(a.nomTexto, nomTexto);
-        a.idDOC = contarCantIdDoc(archivo);
-        a.idDOC +=1;
+        a.idDOC = contarCantIdDoc(archivo); // Acá se llama a esta función para determinar cuantos idDoc hay en el archivo.
+        a.idDOC +=1; // Y acá se incrementa en +=1 el valor retornado por la función anterior y así cargarlo en el archivo.
         fwrite(&a, sizeof(infoTexto), 1, arch);
-        fclose(arch);
+        if(fclose(arch) != 0)
+            printf("\nError al cerrar el archivo!...\n");
     }
+    else
+        printf("\nError al abrir el archivo!...\n");
 }
+
+/// Función que recorre el archivo de nombresTextos y así mostrarlo por pantalla.
 void recorrerArch (char archivo[])
 {
     int flag = 0;
@@ -52,16 +65,21 @@ void recorrerArch (char archivo[])
         while (fread(&a, sizeof(infoTexto), 1, arch)>0)
         {
             flag = 1;
-            printf("\nNombre del texto: %s\n", a.nomTexto);
-            printf("Id doc: %d\n", a.idDOC);
+            printf("\n-Nombre del texto: %s\n", a.nomTexto);
+            printf("\n--- Id doc: %d\n", a.idDOC);
         }
-        fclose(arch);
+        if(fclose(arch) != 0)
+            printf("\nError al cerrar el archivo!...\n");
     }
+    else
+        printf("\nError al abrir el archivo!...\n");
     if (flag == 0)
     {
         printf("El archivo no tiene textos cargados! \n");
     }
 }
+
+///Retorna la dimensión del archivo de texto cargado para ser utilizada como válidos.
 int dimensionArchivo (char archivoTexto[])
 {
     FILE* arch = fopen(archivoTexto, "rb");
@@ -71,14 +89,14 @@ int dimensionArchivo (char archivoTexto[])
         fseek(arch, 0, SEEK_END);
         tamanio = (ftell(arch)/(sizeof(char)));
         if(fclose(arch) != 0)
-            printf("\n Error al cerrar el archivo!...\n");
+            printf("\nError al cerrar el archivo!...\n");
     }
     else
-        printf("\n Error al abrir el archivo!...\n");
+        printf("\nError al abrir el archivo!...\n");
     return tamanio;
 }
-// Abre el archivo bin de texto por parametro y lo retorna formando un string del tamaño total del texto.
 
+/// Abre el archivo bin de texto por parametro y retorna un string del tamaño total del texto.
 char *generarStringTxt(char archivoTexto[], int tamanio){
     FILE *arch = fopen(archivoTexto, "rb");
     char *texto;
@@ -87,16 +105,16 @@ char *generarStringTxt(char archivoTexto[], int tamanio){
         fseek(arch, 0, SEEK_SET);
         fread(texto, tamanio*sizeof(char), 1, arch);
         if(fclose(arch) != 0)
-            printf("\n Error al cerrar el archivo!...\n");
+            printf("\nError al cerrar el archivo!...\n");
     }
     else
-        printf("\n Error al abrir el archivo!...\n");
+        printf("\nError al abrir el archivo!...\n");
     return texto;
 }
 
-// Compara los caracteres devolviendo 1 si es una letra valida, o 0 si es un caracter especial, espacio, etc...
-// Solo valido para ASCII en codificacion ANSI
-
+/** Compara los caracteres devolviendo 1 si es una letra valida, o 0 si es un caracter especial, espacio, etc...
+* Solo valido para ASCII en codificacion ANSI
+*/
 int validaChar(char letra){
     int rta = 0;
 
@@ -120,13 +138,12 @@ int validaChar(char letra){
     return rta;
 }
 
-// Genera el contador de palabras recorriendo el string de todo el texto, generado previamente
-// y descarta los espacios y caracteres especiales
-
+/** Genera el contador de palabras recorriendo el string de todo el texto, generado previamente
+* y descarta los espacios y caracteres especiales
+*/
 int contarCantidadPalabras(char texto[], int validos){ ///validos = validos del texto
     int cant = 0;
     int i = 0;
-    // printf("\nContarPalabras Validos: %i", validos);
     while(i<validos){
         while(validaChar(texto[i])==0 && i<validos)
         {
@@ -146,8 +163,8 @@ int contarCantidadPalabras(char texto[], int validos){ ///validos = validos del 
 }
 
 /**
- Separa las palabras del string de todo el texto, formando un arreglo del tipo "Termino" con cada palabra
- Recorro el arreglo de caracteres de todo el texto formando palabras mientras que los caracteres sean invalidos,
+ Separa las palabras del string de todo el texto, cargando un arreglo del tipo "Termino" con cada palabra
+ Recorro el arreglo de caracteres de todo el texto mientras que los caracteres sean invalidos,
  cuando encuentro un caracter valido, empiezo a copiar todo lo que sigue hasta encontrar un nuevo caracter invalido
  dentro del arreglo "palabra" que tiene como propiedad la estructura "Termino" de cada posicion del arreglo.
 **/
@@ -167,9 +184,6 @@ void textoToArregloTermino(char texto[], int validos, Termino textoT[], int cant
             int j = 0;
             textoT[pos].idDOC = idDoc;
             textoT[pos].pos = pos+1;
-//          textoT[pos].palabra[j] = texto[i]; /// no es necesario repetir esto primero, con el while ya alcanza
-//          i++;
-//          j++;
             while(validaChar(texto[i])==1 && i<validos)
             {
                 textoT[pos].palabra[j] = texto[i];
@@ -183,16 +197,17 @@ void textoToArregloTermino(char texto[], int validos, Termino textoT[], int cant
 }
 
 void mostrarTermino(Termino palabra){
-    printf("\n ID Documento: %i", palabra.idDOC);
-    printf("\n Palabra: %s", palabra.palabra);
-    printf("\n Posicion: %i\n", palabra.pos);
+    printf("\n\tID Documento: %i", palabra.idDOC);
+    printf("\n\tPalabra: %s", palabra.palabra);
+    printf("\n\tPosicion: %i\n", palabra.pos);
 }
-
+/// Función auxiliar solo utilizada para ver como se estaban cargando los términos.
 void mostrarArregloTermino(Termino arreglo[], int validos){
     for(int i=0; i<validos; i++)
         mostrarTermino(arreglo[i]);
 }
 
+/// Función auxiliar solo utilizada para saber el codigo Ascii de los carácteres especiales leídos por el sistema.
 void mostrarLetraAsciiString(char texto[], int validos){
     int i=0;
     while(i<validos){
@@ -200,7 +215,7 @@ void mostrarLetraAsciiString(char texto[], int validos){
         i++;
     }
 }
-
+/// Guarda el arreglo de terminos en el archivo dicccionario.
 void guardarTextoEnArchivoDic(char archivo[], Termino palabras[], int validos){
     FILE *arch = fopen(archivo, "ab");
 
@@ -213,8 +228,27 @@ void guardarTextoEnArchivoDic(char archivo[], Termino palabras[], int validos){
         }
 
         if(fclose(arch) != 0)
-            printf("\n Error al cerrar el archivo!...\n");
+            printf("\nError al cerrar el archivo!...\n");
     }
     else
-        printf("\n Error al abrir el archivo!...\n");
+        printf("\nError al abrir el archivo!...\n");
+}
+
+/// Funcion auxiliar utilizada para ver como se iba cargando el diccionario (Utilizada tambien en el 11 como solo DESARROLLADOR).
+void mostrarDiccionario (char archivo[])
+{
+    Termino a;
+    FILE* arch = fopen(archivo, "rb");
+    if (arch)
+    {
+        while (fread(&a, sizeof(Termino),1, arch)>0)
+        {
+            mostrarTermino(a);
+        }
+
+        if(fclose(arch) != 0)
+            printf("\nError al cerrar el archivo!...\n");
+    }
+    else
+        printf("\nError al abrir el archivo!...\n");
 }

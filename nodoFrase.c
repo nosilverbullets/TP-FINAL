@@ -22,9 +22,9 @@ void insertarNodoFrase(nodoFrase** lista, char* palabra){
 
 void mostrarNodoFrase(nodoFrase* nodo){
     printf("\n");
-    printf("[ palabra: %s\n", nodo->palabra);
-    printf("[ idDOC: %i\n", nodo->idDOC);
-    printf("[ pos: %i\n", nodo->pos);
+    printf("\t[Palabra: %s\n", nodo->palabra);
+    printf("\t[IdDOC: %i\n", nodo->idDOC);
+    printf("\t[Pos: %i\n", nodo->pos);
 
 }
 
@@ -36,10 +36,10 @@ void mostrarListaFrase(nodoFrase* lista){
 }
 
 void mostrarFraseEncontrada(nodoFrase* lista){
-    printf("Frase encontrada en el idDOC: %i\n", lista->idDOC);
+    printf("Frase o palabras encontradas en el idDOC: %i\n", lista->idDOC);
     while(lista){
-        printf("Palabra: \'%s\' ---> ", lista->palabra);
-        printf("Pos: %i \n", lista->pos);
+        printf("\tPalabra: \'%s\' ---> ", lista->palabra);
+        printf("\tPos: %i \n", lista->pos);
         lista = lista->sig;
     }
 
@@ -81,9 +81,7 @@ int leerPalabra(char *palabra){
     return i; /// Retorna los válidos
 }
 
-/**
- *  Función que lee una frase, palabra a palabra, hasta que se ingrese un enter, la valida y almacena en una lista.
- */
+///Función que lee una frase, palabra a palabra, hasta que se ingrese un enter, la valida y almacena en una lista.
 void ingresarFrase(nodoFrase** lista){
     char palabraFrase[LONG_WORD];
     int exitFlag = 0, dim;
@@ -104,9 +102,7 @@ void ingresarFrase(nodoFrase** lista){
     printf("\n");   //Imprimo un enter para que por consola se vea el salto de línea.
 }
 
-/**
- *  Retorna una lista de nodoT con las ocurrencias de una palabra pasada por parámetro hallada en el árbol.
- */
+///Retorna una lista de nodoT con las ocurrencias de una palabra pasada por parámetro hallada en el árbol.
 nodoT* buscarListaOcurrenciasPalabra(nodoA *arbol, char *palabra){
     nodoT* res = NULL;
     nodoA *nodoArbol = existeNodo(arbol, palabra);
@@ -117,91 +113,13 @@ nodoT* buscarListaOcurrenciasPalabra(nodoA *arbol, char *palabra){
 
     return res;
 }
-///Inciso 3 funcion auxiliar
-int _buscaPalabrasMismoDoc(int idDOC, nodoFrase* listaP, nodoA* arbol){
-    int encontrado = 0;
-    int exitFlag = 0;
+///Funcion para liberar una frase luego de ser utilizada
+void liberarFrase(nodoFrase** lista){
+    nodoFrase* aux;
 
-    //Recorro la lista con la frase a encontrar.
-    while (listaP && exitFlag == 0){
-
-        // Seteo encontrado en 0 aca, para cada nueva busqueda
-        encontrado = 0;
-        //Busco la lista de ocurrencias de la palabra actual en el arbol.
-        nodoT* nodoPalabra = buscarListaOcurrenciasPalabra(arbol, listaP->palabra);
-
-        //Comparo si de esa lista, alguna de las ocurrencias matchean con el id y la posición contigua.
-        while(nodoPalabra && nodoPalabra->idDOC < idDOC){ // Si el idDOC de la lista se mantiene menor al del parametro
-                                                          // avanzo en la lista de ocurrencias
-                nodoPalabra = nodoPalabra->sig;
-        }
-
-        if(nodoPalabra && idDOC == nodoPalabra->idDOC){ // Significa que hubo match
-                //Guardo en la lista los datos del match.
-                listaP->idDOC = nodoPalabra->idDOC;
-                listaP->pos = nodoPalabra->pos;
-
-                encontrado = 1;
-        }
-
-        //De no encontrar un match, corto el while con el exitFlag.
-        if (encontrado == 0){
-            exitFlag = 1;
-        } else {
-            //Si no, avanzo en la lista hacia la siguiente palabra de la frase.
-            listaP = listaP->sig;
-
-        }
+    while(*lista){
+        aux = *lista;
+        *lista = (*lista)->sig;
+        free(aux);
     }
-
-    return encontrado;
-}
-/**
- *  Función auxiliar que se utiliza en la función buscarFrase() para hallar desde la segunda palabra en adelante
- *  si la frase existe en el diccionario. Recibe el idDOC y pos de la primer palabra, la lista que contiene
- *  la frase (sin la primer palabra) y el arbol para buscar.
- */
-int _buscarFrase(int idDOC, int pos, nodoFrase* listaF, nodoA* arbol){
-    int encontrado = 0;
-    int exitFlag = 0;
-
-    //Recorro la lista con la frase a encontrar.
-    while (listaF && exitFlag == 0){
-
-        // Seteo encontrado en 0 aca, para cada nueva busqueda
-        encontrado = 0;
-        //Busco la lista de ocurrencias de la palabra actual en el arbol.
-        nodoT* nodoPalabra = buscarListaOcurrenciasPalabra(arbol, listaF->palabra);
-
-        //Comparo si de esa lista, alguna de las ocurrencias matchean con el id y la posición contigua.
-        while(nodoPalabra && nodoPalabra->idDOC < idDOC){ // Si el idDOC de la lista se mantiene menor al del parametro
-                                                          // avanzo en la lista de ocurrencias
-                nodoPalabra = nodoPalabra->sig;
-        }
-
-        while(nodoPalabra && idDOC == nodoPalabra->idDOC && nodoPalabra->pos < pos){
-
-                nodoPalabra = nodoPalabra->sig;
-        }
-        if(nodoPalabra && idDOC == nodoPalabra->idDOC && nodoPalabra->pos == pos + 1){ // Significa que hubo match
-                //Guardo en la lista los datos del match.
-                listaF->idDOC = nodoPalabra->idDOC;
-                listaF->pos = nodoPalabra->pos;
-
-                encontrado = 1;
-        }
-
-        //De no encontrar un match, corto el while con el exitFlag.
-        if (encontrado == 0){
-            exitFlag = 1;
-        } else {
-            //Si no, avanzo en la lista hacia la siguiente palabra de la frase.
-            listaF = listaF->sig;
-
-            //Aumento la posición para que la siguiente palabra buscada sea contigua a esta.
-            pos++;
-        }
-    }
-
-    return encontrado;
 }

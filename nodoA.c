@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "nodoA.h"
+/// Funciondes de nodoA y del arbol.
 
 nodoA *crearNodoA(char palabra[]){
     nodoA *nuevo = (nodoA*)malloc(sizeof(nodoA));
@@ -12,7 +13,7 @@ nodoA *crearNodoA(char palabra[]){
     nuevo->der = NULL;
     return nuevo;
 }
-
+/// Inserción del ABB
 void insertarNodoA(nodoA** arbol, Termino nuevo){
     if(*arbol){
         switch(strcmp((*arbol)->palabra, nuevo.palabra)){
@@ -33,7 +34,7 @@ void insertarNodoA(nodoA** arbol, Termino nuevo){
         (*arbol)->ocurrencias = crearNodoT(nuevo.idDOC, nuevo.pos);
     }
 }
-
+///Creación del arbol a partir del archivo diccionario
 void crearArbolDiccionario(nodoA** arbol, char diccionario[]){
     FILE *arch = fopen(diccionario, "rb");
 
@@ -46,27 +47,27 @@ void crearArbolDiccionario(nodoA** arbol, char diccionario[]){
         }
 
         if(fclose(arch) != 0)
-            printf("\n Error al cerrar el archivo!...\n");
+            printf("\nError al cerrar el archivo!...\n");
     }
     else
-        printf("\n Error al abrir el archivo!...\n");
+        printf("\nError al abrir el archivo!...\n");
 }
-
+///Aux de prints de nodoA
 void mostrarNodoA(nodoA* arbol){
-    printf("\n\n Palabra: %s", arbol->palabra);
-    printf("\n Frecuencia: %i", arbol->frecuencia);
-    printf("\n Ocurrencias: ");
+    printf("\nPalabra: %s", arbol->palabra);
+    printf("\nFrecuencia: %i", arbol->frecuencia);
+    printf("\nOcurrencias: ");
     mostrarListaNodoT(arbol->ocurrencias);
 }
-
-void mostrarArbolInOrder(nodoA *arbol){
+///Funcion para recorrer y mostrar un arbol en preOrder
+void mostrarArbolPreOrder(nodoA *arbol){
     if(arbol){
         mostrarNodoA(arbol);
-        mostrarArbolInOrder(arbol->izq);
-        mostrarArbolInOrder(arbol->der);
+        mostrarArbolPreOrder(arbol->izq);
+        mostrarArbolPreOrder(arbol->der);
     }
 }
-
+///Funcion utilizada para verificar si una palabra se encuentra en el arbol
 nodoA *existeNodo(nodoA *arbol, char palabra[]){
     nodoA *aRetornar = NULL;
     if(arbol){
@@ -84,7 +85,3 @@ nodoA *existeNodo(nodoA *arbol, char palabra[]){
     }
     return aRetornar;
 }
-
-
-
-//void mostrarTextoUnico

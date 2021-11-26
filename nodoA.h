@@ -16,7 +16,7 @@ nodoA *crearNodoA(char palabra[]);
 void insertarNodoA(nodoA** arbol, Termino nuevo);
 void crearArbolDiccionario(nodoA** arbol, char diccionario[]);
 void mostrarNodoA(nodoA* arbol);
-void mostrarArbolInOrder(nodoA* arbol);
+void mostrarArbolPreOrder(nodoA* arbol);
 nodoA *existeNodo(nodoA* arbol, char palabra[]);
 void buscarPalabra(nodoA* arbol, char palabra[]);
 

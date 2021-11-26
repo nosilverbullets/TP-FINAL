@@ -1,5 +1,9 @@
 #include "menu.h"
 
+/**Esta funcion pide por consola el nombre del texto para así guardarse en el archivo de nombres de textos (Que contiene los nombres junto con sus idDoc)
+*  Luego de cargar ese archivo, concatena un .bin a ese nombre así pasa a ser un archivo (Ya puesto en la carpeta del proyecto)
+*  Con este archivo se genera un string de todo el texto, para luego cargarlo en el arreglo Termino, y así cargarlo en el diccionario.
+*/
 void cargaTextoDiccionario ()
 {
     char nomTexto [100];
@@ -9,6 +13,7 @@ void cargaTextoDiccionario ()
     int vali=dimensionArchivo(nomTexto);
     char *texto = (char*)malloc(sizeof(char)*vali);
     strcpy(texto, generarStringTxt(nomTexto, vali));
+    printf("Contenido de el texto: \n");
     printf("%s", texto);
     printf("\n");
     system("pause");
@@ -19,6 +24,8 @@ void cargaTextoDiccionario ()
     textoToArregloTermino(texto, vali, palabrasTexto1, cant, idDoc);
     guardarTextoEnArchivoDic(DICCIONARIO, palabrasTexto1, cant);
 }
+
+///Llama a la funcion de carga de los diferentes textos y su correspondiente carga en el diccionario hasta que por consola se diga que no.
 void menuTextoDiccionario ()
 {
     char control = 's';
@@ -38,58 +45,77 @@ void menuTextoDiccionario ()
     printf("Lista de textos cargados: \n");
     recorrerArch(NOMBRESTEXTOS);
 }
+
+///Menu de funcionalidad del programa completo, llama a todas las funciones de usuario (Más 3 funciones de desarrollador)
 void menuUsuario ()
 {
-    nodoA* arbol= NULL;
+    nodoA* arbol = NULL;
+    nodoA* mayorFREC = NULL;
     nodoFrase* lista = NULL;
     crearArbolDiccionario(&arbol,DICCIONARIO);
     char palabra [20];
     int control = '0';
+    int flag = 0;
     int idBusqueda1 = 0;
     int idBusqueda2 = 0;
     int fraseEncontrada = 0;
-
-
     do
     {
         printf("\n*** Bienvenido al motor de busqueda de LAB 2 ***\n");
-        printf("Ingrese el numero de la funcion que quiera utilizar.\n");
+        printf("\nIngrese el numero de la funcion que quiera utilizar.\n");
         printf("1.Buscar todas las apariciones de un termino en algun documento\n");
         printf("2.Buscar todas las apariciones de un termino en un documento y otro\n");
         printf("3.Buscar la aparicion de mas de un termino en el mismo documento.\n");
         printf("4.Buscar una frase completa\n");
         printf("5.Buscar la palabra de mas frecuencia que aparece en alguno de los docs.\n");
         printf("6.Ingresar una palabra y buscar similares.\n");
-        printf("10.Cargar textos al sistema. (DESARROLLADOR)\n");
-        printf("0.Salir del programa.\n");
+        printf("\n10.Cargar textos al sistema. (DESARROLLADOR)\n");
+        printf("11.Mostrar diccionario. (DESARROLLADOR)\n");
+        printf("12.Mostrar arbol en PREORDER. (DESARROLLADOR)\n");
+        printf("\n0.Salir del programa.\n");
         printf("\n************************************************\n");
         printf("Ingrese su opcion:\n");
+        fflush(stdin);
         scanf("%d", &control);
         system("cls");
         switch (control)
         {
         case 1:
-            printf("\n Ingrese la palabra: ");
+            printf("\nIngrese la palabra: ");
             fflush(stdin);
             gets(palabra);
             buscarPalabra(arbol, palabra);
-            printf("\n");
-            system("pause");
-            system("cls");
             break;
         case 2:
-            printf("\n Ingrese la palabra: ");
-            fflush(stdin);
-            gets(palabra);
-            printf("Textos disponibles: \n");
+            do
+            {
+                flag = 0;
+                printf("\nIngrese la palabra: ");
+                fflush(stdin);
+                gets(palabra);
+                flag = verificarPalabra(arbol, palabra);
+            }while (flag!=0);
+            printf("\nTextos disponibles: \n");
             recorrerArch(NOMBRESTEXTOS);
-            printf("Vamos a comparar entre dos id's\n");
+            printf("\nVamos a comparar entre dos id's\n");
             printf("\nIngrese los id del los documentos que quiera buscar su palabra:\n");
-            verificarIdIngresado(&idBusqueda1, &idBusqueda2);
+            do
+            {
+                flag = 0;
+                printf("\nPrimer idDoc\n");
+                scanf("%d", &idBusqueda1);
+                flag = verificarIdIngresado(idBusqueda1);
+            }
+            while (flag != 0);
+            do
+            {
+                flag = 0;
+                printf("\nSegundo idDoc\n");
+                scanf("%d", &idBusqueda2);
+                flag = verificarIdIngresado(idBusqueda2);
+            }
+            while (flag != 0);
             buscarPalabraPorAnd(arbol, palabra, idBusqueda1, idBusqueda2);
-            printf("\n");
-            system("pause");
-            system("cls");
             break;
         case 3:
             printf("Ingrese las palabras a buscar:\n");
@@ -99,9 +125,7 @@ void menuUsuario ()
             {
                 mostrarFraseEncontrada(lista);
             }
-            printf("\n");
-            system("pause");
-            system("cls");
+            liberarFrase(&lista);
             break;
         case 4:
             printf("Ingrese la frase a buscar:\n");
@@ -111,42 +135,51 @@ void menuUsuario ()
             {
                 mostrarFraseEncontrada(lista);
             }
-            printf("\n");
-            system("pause");
-            system("cls");
+            liberarFrase(&lista);
             break;
         case 5:
-            printf("\n");
-            system("pause");
-            system("cls");
+            do
+            {
+                flag = 0;
+                printf("Ingrese el idDoc donde quiera buscar la palabra con mayor frecuencia.\n");
+                scanf("%d", &idBusqueda1);
+                flag = verificarIdIngresado(idBusqueda1);
+            }
+            while (flag != 0);
+            mayorFREC = mayorFrecuenciaDoc(arbol, idBusqueda1);
+            mostrarNodoAFREC(mayorFREC, idBusqueda1);
             break;
         case 6:
-            printf("\n Ingrese la palabra: ");
+            printf("\nIngrese la palabra: ");
             fflush(stdin);
             gets(palabra);
             printf("Palabras sugeridas a la palabra %s : \n", palabra);
             sugierePalabrasSimilares(arbol, palabra);
-            printf("\n");
-            system("pause");
-            system("cls");
             break;
         case 10:
             menuTextoDiccionario();
             printf("\n");
-            system("pause");
-            system("cls");
+            break;
+        case 11:
+            mostrarDiccionario(DICCIONARIO);
+            break;
+        case 12:
+            mostrarArbolPreOrder(arbol);
             break;
         case 0:
-            printf("\n****GRACIAS VUELVA PRONTOS****\n");
+            printf("\n--------------------------------\n");
+            printf("\n**** GRACIAS VUELVA PRONTOS ****\n");
+            printf("\n************ <3 <3 *************\n");
+            printf("\n--------------------------------\n");
             exit(0);
-
         default:
             printf("\n***OPCION INCORRECTA***\n");
             printf("\n");
-            system("pause");
-            system("cls");
             break;
         }
+        printf("\n");
+        system("pause");
+        system("cls");
     }
     while (control != 0);
 

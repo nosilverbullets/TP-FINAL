@@ -10,7 +10,10 @@
 #include <conio.h>
 #define LONG_WORD 20
 
-///COMENTAR PARA QUÉ SIRVE ESTA ESTRUCTURA
+/**
+* Esta estructura fue realizada para utilizarse en las funciones 3 y 4
+* Solo contiene la palabra, el idDoc y la posición de la palabra.
+*/
 typedef struct nodoFrase
 {
     char palabra[20];
@@ -30,4 +33,5 @@ void ingresarFrase(nodoFrase** lista);
 nodoT* buscarListaOcurrenciasPalabra(nodoA *arbol, char *palabra);
 int _buscaPalabrasMismoDoc(int idDOC, nodoFrase* listaP, nodoA* arbol);
 int _buscarFrase(int idDOC, int pos, nodoFrase* lista, nodoA* arbol);
+void liberarFrase(nodoFrase** lista);
 #endif // NODOFRASE_H_INCLUDED
